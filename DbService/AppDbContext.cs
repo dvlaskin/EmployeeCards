@@ -13,16 +13,21 @@ namespace EmployeeCards.DbService
 
         public AppDbContext() : base(GetConnectionString())
         {
-
+            Database.SetInitializer<AppDbContext>(new DbInitializerDefault());
         }
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Position> Positions { get; set; }
-        public DbSet<Register> Register { get; set; }
+        public DbSet<RegisterCard> RegisterCards { get; set; }
 
         static string GetConnectionString()
         {
             return ConfigurationManager.ConnectionStrings["LocalDb"].ConnectionString;
+        }
+
+        public static AppDbContext GetInstance()
+        {
+            return new AppDbContext();
         }
 
     }

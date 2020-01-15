@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EmployeeCards.DbService;
+using EmployeeCards.Models.DbModels;
 
 namespace EmployeeCards.Controllers
 {
@@ -11,27 +12,14 @@ namespace EmployeeCards.Controllers
     {
         public ActionResult Index()
         {
+            var regCards = new List<RegisterCard>();
 
-            using(var db = new AppDbContext())
+            using (var db = AppDbContext.GetInstance())
             {
-                var test = db.Employees.Select(s => s.FirstName).ToArray();
+                regCards = db.RegisterCards.ToList();
             }
 
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(regCards);
         }
     }
 }
