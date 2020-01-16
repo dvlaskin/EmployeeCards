@@ -1,0 +1,39 @@
+﻿
+<!-- Employee Add Modal -->
+<div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Новый сотрудник</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body offset-2 col-8">
+                <row>
+                    <label for="eMLastName">Фамилия</label>
+                    <input type="text" class="form-control" id="eMLastName" placeholder="Иванов">
+                    <label for="eMFirstName">Имя</label>
+                    <input type="text" class="form-control" id="eMFirstName" placeholder="Иван">
+                    <label for="eMPosition">Должность</label>
+                    <select class="form-control" id="eMPosition">
+                        @foreach (var item in ViewBag.Positions)
+                        {
+                            <option id="@item.Key" value="@item.Value" >@item.Value</option>
+                        }
+                    </select>
+                    <label for="eMSalary">Оклад</label>
+                    <input type="number" class="form-control" id="eMSalary" placeholder="1000.00">
+                    <label for="eMDateForm">Нанят</label>
+                    <input type="date" class="form-control" id="eMDateForm">
+                    <label for="eMDateTo">Уволен</label>
+                    <input type="date" class="form-control" id="eMDateTo">
+                </row>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+                <button type="button" class="btn btn-primary" id="employeeSave">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>

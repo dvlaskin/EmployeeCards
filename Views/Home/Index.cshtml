@@ -7,27 +7,59 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h2>Getting started</h2>
-        <table>
-            <tr>
-                <th>#</th>
-                <th>Должность</th>
-                <th>Сотрудник</th>
-                <th>Оклад</th>
-                <th>Дата назначения</th>
-                <th>Дата увольнения</th>
-            </tr>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.RegisterId</td>
-                    <td>@item.Position.Title</td>
-                    <td>@string.Format("{0} {1}", item.Employee.LastName, item.Employee.FirstName)</td>
-                    <td>@item.Salary</td>
-                    <td>@DateTime.Parse(item.DateFrom.ToString()).ToString("MM'/'dd'/'yyyy")</td>
-                    <td>@item.DateTo</td>
-                </tr>
-            }
-        </table>
+        <h2>Employee Cards</h2>
+        <div>
+            <row class="button-panel">
+                <button type="button" id="addEmployee" class="btn btn-primary"
+                        data-toggle="modal" data-target="#employeeModal">
+                    Добавить сотрудника
+                </button>
+                <button type="button" id="addPosition" class="btn btn-primary"
+                        data-toggle="modal" data-target="#positionModal">
+                    Добавить должность
+                </button>
+            </row>
+        </div>
+        <div>
+            <table class="table employee-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Должность</th>
+                        <th>Сотрудник</th>
+                        <th>Оклад</th>
+                        <th>Дата назначения</th>
+                        <th>Дата увольнения</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.RegisterId</td>
+                            <td>@item.Position.Title</td>
+                            <td>@string.Format("{0} {1}", item.Employee.LastName, item.Employee.FirstName)</td>
+                            <td>@item.Salary</td>
+                            <td>@DateTime.Parse(item.DateFrom.ToString()).ToString("MM'/'dd'/'yyyy")</td>
+                            <td>@item.DateTo</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+
     </div>
 </div>
+
+@{Html.RenderPartial("EmployeeModal");}
+
+@{Html.RenderPartial("PositionModal");}
+
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/sitescript.js")"></script>
+}

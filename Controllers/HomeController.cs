@@ -14,13 +14,29 @@ namespace EmployeeCards.Controllers
         {
             var regCards = new List<RegisterCard>();
 
+            var positions = new Dictionary<int, string>();
+
             using (var db = AppDbContext.GetInstance())
             {
                 List<RegisterCard> cardItems = db.RegisterCards.Include("Employee").Include("Position").ToList();
                 regCards.AddRange(cardItems);
+
+                positions = db.Positions.ToDictionary(t => t.PositionId, t => t.Title);
             }
 
+            ViewBag.Positions = positions;
+
             return View(regCards);
+        }
+
+        public ActionResult EmployeeModal()
+        {
+            return PartialView();
+        }
+
+        public ActionResult PositionModal()
+        {
+            return PartialView();
         }
     }
 }

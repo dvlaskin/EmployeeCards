@@ -14,7 +14,8 @@ namespace EmployeeCards
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new DbInitializerClean());
+            //Database.SetInitializer(new DbInitializerClean());
+            Database.SetInitializer(new DbInitializerDefault());
             using (var db = new AppDbContext())
             {
                 db.Database.Initialize(true);

@@ -1,6 +1,12 @@
-﻿body {
+﻿@font-face {
+    font-family: Roboto;
+    src: url(../fonts/roboto/Roboto-Light.ttf);
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: Roboto;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +27,18 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.employee-table thead {
+    color: white;
+    background-color: gray;
+}
+
+.button-panel {
+    display: flex;
+    justify-content: space-between;
 }
