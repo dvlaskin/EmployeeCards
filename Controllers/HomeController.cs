@@ -16,7 +16,8 @@ namespace EmployeeCards.Controllers
 
             using (var db = AppDbContext.GetInstance())
             {
-                regCards = db.RegisterCards.ToList();
+                List<RegisterCard> cardItems = db.RegisterCards.Include("Employee").Include("Position").ToList();
+                regCards.AddRange(cardItems);
             }
 
             return View(regCards);

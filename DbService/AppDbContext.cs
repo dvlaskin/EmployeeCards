@@ -13,7 +13,7 @@ namespace EmployeeCards.DbService
 
         public AppDbContext() : base(GetConnectionString())
         {
-            Database.SetInitializer<AppDbContext>(new DbInitializerDefault());
+
         }
 
         public DbSet<Employee> Employees { get; set; }

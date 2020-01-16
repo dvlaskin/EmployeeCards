@@ -11,9 +11,10 @@ namespace EmployeeCards.Models.DbModels
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int EmployeeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public List<RegisterCard> RegisterCards { get; set; }
     }
 }

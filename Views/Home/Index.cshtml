@@ -6,7 +6,7 @@
 
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <h2>Getting started</h2>
         <table>
             <tr>
@@ -20,11 +20,11 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.PositionId.Title</td>
-                    <td>@string.Format("{0} {1}", item.EmployeeId.LastName, item.EmployeeId.FirstName)</td>
+                    <td>@item.RegisterId</td>
+                    <td>@item.Position.Title</td>
+                    <td>@string.Format("{0} {1}", item.Employee.LastName, item.Employee.FirstName)</td>
                     <td>@item.Salary</td>
-                    <td>@item.DateFrom</td>
+                    <td>@DateTime.Parse(item.DateFrom.ToString()).ToString("MM'/'dd'/'yyyy")</td>
                     <td>@item.DateTo</td>
                 </tr>
             }

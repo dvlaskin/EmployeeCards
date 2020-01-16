@@ -11,11 +11,15 @@ namespace EmployeeCards.Models.DbModels
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public Employee EmployeeId { get; set; }
-        public Position PositionId { get; set; }
+        public int RegisterId { get; set; }
         public decimal Salary { get; set; }
         public DateTime? DateFrom { get; set; }
         public DateTime? DateTo { get; set; }
+
+        public int? EmployeeId { get; set; }
+        public virtual Employee Employee { get; set; }
+
+        public int? PositionId { get; set; }
+        public virtual Position Position { get; set; }
     }
 }
