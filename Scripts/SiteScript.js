@@ -1,6 +1,19 @@
 ﻿$(document).ready(function () {
 
-    $('#employee-table').DataTable();
+    $('#employee-table').DataTable(
+    {
+            "sAjaxSource": '/Home/ReloadTable',
+            "columns": [
+
+                { "data": "RegisterId" },
+                { "data": "Title" },
+                { "data": "Fio" },
+                { "data": "Salary" },
+                { "data": "DateHired" },
+                { "data": "DateFired" }  
+
+            ]
+    });
 
 });
 
@@ -22,7 +35,6 @@ $(document).on('click', '#positionCancel', function () {
 });
 
 $(document).on('click', '#employeeSave', function() {
-    console.log('employeeSave');
 
     const regCard = {
         Firstname: $('#eMFirstName').val(),
@@ -34,14 +46,11 @@ $(document).on('click', '#employeeSave', function() {
         DateFired: $('#eMDateFired').val()
     }
 
-    console.log(regCard);
-
     addNewEmployeeCard(regCard);
 });
 
 $(document).on('click', '#positionSave', function () {
 
-    console.log('positionSave');
     const positionTitle = $('#pMPosition').val();
     addNewPosition(positionTitle);
 
@@ -65,7 +74,6 @@ function resetPositionModal() {
 }
 
 function addNewPosition(positionTitle) {
-    console.log(positionTitle);
 
     $.ajax({
         type: "POST",
@@ -101,17 +109,7 @@ function addNewEmployeeCard(regCard) {
 
         console.log('Success');
 
-        const dateHired = dateFormat(regCard.DateHired);
-        const dateFired = dateFormat(regCard.DateFired);
-
-        $('#employee-table').DataTable().row.add([
-            data.RegisterId,
-            `${regCard.PositionTitle}`,
-            `${regCard.Lastname} ${regCard.Firstname}`,
-            `${regCard.Salary}`,
-            `${dateHired}`,
-            `${dateFired}`
-        ]).draw();
+        dataTableReload();
 
         $('#employeeModal').modal('toggle');
         $('#eMError').text('');
@@ -126,15 +124,7 @@ function addNewEmployeeCard(regCard) {
     });
 }
 
-function dateFormat(data) {
+function dataTableReload() {
 
-    if (data === '')
-        return null;
-
-    data = new Date(data);
- 
-    var nDate = data.getMonth() + 1 + '/'
-        + data.getDate() + '/'
-        + data.getFullYear();
-    return nDate;
+    $('#employee-table').DataTable().ajax.reload();
 }

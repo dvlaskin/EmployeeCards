@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,23 +15,16 @@ namespace EmployeeCards.Controllers
     {
         public ActionResult Index()
         {
-            var regCards = new List<RegisterCard>();
-
             var positions = new Dictionary<int, string>();
 
             using (var db = AppDbContext.GetInstance())
             {
-                var regCardDb = new RegisterCardService(db);
-                IEnumerable<RegisterCard> cardItems = regCardDb.GetItems();
-
-                regCards.AddRange(cardItems);
-
                 positions = db.Positions.ToDictionary(t => t.PositionId, t => t.Title);
             }
 
             ViewBag.Positions = positions;
 
-            return View(regCards);
+            return View();
         }
 
         ActionResult EmployeeModal()
@@ -86,6 +80,12 @@ namespace EmployeeCards.Controllers
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return Json(new { error = "Текущая дата \"Нанят\" не може быть ранее или равна предыдущим датам \"Нанят\"!" });
+            }
+
+            if (cardModel.Salary < 0)
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { error = "Оклад должен быть больше нуля!" });
             }
 
             var regCard = new RegisterCard();
@@ -144,5 +144,35 @@ namespace EmployeeCards.Controllers
                 return employee.EmployeeId;
             }
         }
+
+        public string ReloadTable()
+        {
+            var regCards = new List<RegCardsViewModel>();
+
+            using (var db = AppDbContext.GetInstance())
+            {
+                var regCardDb = new RegisterCardService(db);
+                IEnumerable<RegisterCard> cardItems = regCardDb.GetItems();
+                foreach (var item in cardItems)
+                {
+                    var tableRow = new RegCardsViewModel()
+                    {
+                        RegisterId = item.RegisterId,
+                        Title = item.Position.Title,
+                        Fio = $"{item.Employee.LastName} {item.Employee.FirstName}",
+                        Salary = item.Salary,
+                        DateHired = item.DateHired == null ? "" : Convert.ToDateTime(item.DateHired).ToString("MM/dd/yyyy"),
+                        DateFired = item.DateFired == null ? "" : Convert.ToDateTime(item.DateFired).ToString("MM/dd/yyyy")
+                    };
+
+                    regCards.Add(tableRow);
+                }
+            }
+
+            string result = JsonConvert.SerializeObject( new { data = regCards });
+
+            return result;
+        }
     }
+
 }

@@ -142,6 +142,7 @@
     <Compile Include="Models\DbModels\Position.cs" />
     <Compile Include="Models\DbModels\RegisterCard.cs" />
     <Compile Include="Models\ViewModels\Home\EmployeeCardModel.cs" />
+    <Compile Include="Models\ViewModels\Home\RegCardsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

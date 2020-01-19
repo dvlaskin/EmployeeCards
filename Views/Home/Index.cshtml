@@ -34,22 +34,14 @@
                 </thead>
                 <tbody>
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@item.RegisterId</td>
-                            <td>@item.Position.Title</td>
-                            <td>@string.Format("{0} {1}", item.Employee.LastName, item.Employee.FirstName)</td>
-                            <td>@item.Salary</td>
-                            <td>@DateTime.Parse(@item.DateHired.ToString()).ToString("MM'/'dd'/'yyyy")</td>
-                            <td>
-                                @if (@item.DateFired != null)
-                                {
-                                    @DateTime.Parse(@item.DateFired.ToString()).ToString("MM'/'dd'/'yyyy")
-                                }
-                            </td>
-                        </tr>
-                    }
+                    <tr>
+                        <td name ="RegisterId"></td>
+                        <td name ="Title"></td>
+                        <td name ="Fio"></td>
+                        <td name ="Salary"></td>
+                        <td name ="DateHired"></td>
+                        <td name ="DateFired"></td>
+                    </tr>
 
                 </tbody>
             </table>
