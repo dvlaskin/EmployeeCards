@@ -10,12 +10,13 @@
             </div>
             <div class="modal-body offset-2 col-8">
                 <row>
+                    <p id="pMError" class="text-danger"></p>
                     <label for="pMPosition">Должность</label>
-                    <input type="text" class="form-control" id="pMPosition" placeholder="Middle Dev">
+                    <input type="text" class="form-control" id="pMPosition" placeholder="Middle Dev" required>
                 </row>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="positionCancel">Отменить</button>
                 <button type="button" class="btn btn-primary" id="positionSave">Сохранить</button>
             </div>
         </div>

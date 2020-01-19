@@ -13,8 +13,8 @@ namespace EmployeeCards.Models.DbModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RegisterId { get; set; }
         public decimal Salary { get; set; }
-        public DateTime? DateFrom { get; set; }
-        public DateTime? DateTo { get; set; }
+        public DateTime? DateHired { get; set; }
+        public DateTime? DateFired { get; set; }
 
         public int? EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }

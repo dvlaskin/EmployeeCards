@@ -21,7 +21,7 @@
             </row>
         </div>
         <div>
-            <table class="table employee-table">
+            <table id="employee-table" class="table table-hover employee-table">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -41,8 +41,13 @@
                             <td>@item.Position.Title</td>
                             <td>@string.Format("{0} {1}", item.Employee.LastName, item.Employee.FirstName)</td>
                             <td>@item.Salary</td>
-                            <td>@DateTime.Parse(item.DateFrom.ToString()).ToString("MM'/'dd'/'yyyy")</td>
-                            <td>@item.DateTo</td>
+                            <td>@DateTime.Parse(@item.DateHired.ToString()).ToString("MM'/'dd'/'yyyy")</td>
+                            <td>
+                                @if (@item.DateFired != null)
+                                {
+                                    @DateTime.Parse(@item.DateFired.ToString()).ToString("MM'/'dd'/'yyyy")
+                                }
+                            </td>
                         </tr>
                     }
 
@@ -62,4 +67,7 @@
 @section Scripts
 {
     <script src="@Url.Content("~/Scripts/sitescript.js")"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
 }

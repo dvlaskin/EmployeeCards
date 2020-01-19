@@ -46,7 +46,7 @@ namespace EmployeeCards.DbService
                 {
                     EmployeeId = employeeItem.EmployeeId,
                     PositionId = positionItem.PositionId,
-                    DateFrom = DateTime.Now.AddDays(-10),
+                    DateHired = DateTime.Now.AddDays(-10),
                     Salary = 1500.00m
                 };
 
@@ -96,7 +96,7 @@ namespace EmployeeCards.DbService
                 {
                     EmployeeId = employeeItem.EmployeeId,
                     PositionId = positionItem.PositionId,
-                    DateFrom = DateTime.Now.AddDays(-10),
+                    DateHired = DateTime.Now.AddDays(-10),
                     Salary = 1500.00m
                 };
 

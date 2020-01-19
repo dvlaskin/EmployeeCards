@@ -129,13 +129,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DbService\AppDbContext.cs" />
+    <Compile Include="DbService\BaseService.cs" />
     <Compile Include="DbService\DbInitializerDefault.cs" />
+    <Compile Include="DbService\EmployeeService.cs" />
+    <Compile Include="DbService\ITableCrud.cs" />
+    <Compile Include="DbService\PositionService.cs" />
+    <Compile Include="DbService\RegisterCardService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModels\Employee.cs" />
     <Compile Include="Models\DbModels\Position.cs" />
     <Compile Include="Models\DbModels\RegisterCard.cs" />
+    <Compile Include="Models\ViewModels\Home\EmployeeCardModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
