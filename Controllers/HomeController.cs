@@ -101,11 +101,27 @@ namespace EmployeeCards.Controllers
                     DateFired = cardModel.DateFired
                 };
 
-                var regCardDb = new RegisterCardService(db);
-                regCard = regCardDb.Create(regCardObject);
+                try
+                {
+                    var regCardDb = new RegisterCardService(db);
+                    regCard = regCardDb.Create(regCardObject);
 
-                var posinionDb = new PositionService(db);
-                regCard.Position = posinionDb.GetItemById((int)regCard.PositionId);
+                    var posinionDb = new PositionService(db);
+                    regCard.Position = posinionDb.GetItemById((int)regCard.PositionId);
+                }
+                catch (Exception ex)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+                    if (HttpContext.IsDebuggingEnabled)
+                    {
+                        return Json(new { error = $"Возникла внутрення ошибка сервера!\r\n{ex.Message}" });
+                    }
+                    else
+                    {
+                        return Json(new { error = "Возникла внутрення ошибка сервера!" });
+                    }
+                }
             }
 
             return Json(new { RegisterId = regCard.RegisterId });
